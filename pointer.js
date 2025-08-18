@@ -142,7 +142,16 @@ function createFloatingCursorEffect() {
         lastTime = currentTime;
 
         // 寻找 VS Code 的光标 DOM 元素
-        const cursorEl = editor.querySelector(".cursor");
+        // const cursorEl = editor.querySelector(".cursor");
+
+        let cursorEl=null;
+        const cursor_eles=editor.getElementsByClassName("cursor");
+        for (const target of cursor_eles){
+            if (target.style.visibility != "hidden"){
+                cursorEl=target
+            }
+        }
+        
         if (cursorEl) {
             const rect = cursorEl.getBoundingClientRect();
             const editorRect = editor.getBoundingClientRect();
@@ -171,4 +180,5 @@ function createFloatingCursorEffect() {
 }
 
 // 当窗口加载完成后，执行我们的函数
+
 window.addEventListener('load', createFloatingCursorEffect);
